@@ -1,12 +1,13 @@
 class Sort {
 	public static void main(String[] args) {
-		double[] array = {0, 0.5, 23, -8, 1.76, 45, -200, -0.35};
+		Number[] array = {0, 0.5, 23, -8, 1.76, 45, -200, -0.35};
 		stupidSort(array);
 		
-		for (double d : array) System.out.print(d + " ");
+		System.out.println();
+		for (Number n : array) System.out.print(n + " ");
 	}
 
-	public static void stupidSort(double[] arr) {
+	public static <T extends Number> void stupidSort(T[] arr) {
 		while (!isSorted(arr)) {
 			shuffleArray(arr);
 			for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
@@ -14,28 +15,28 @@ class Sort {
 		}
 	}
 	
-	public static void shuffleArray(double[] arr) {
+	public static <T> void shuffleArray(T[] arr) {
 		if ((arr == null) || (arr.length == 1)) return;
-		double[] shuffledArr = new double[arr.length];
-		for (int i = 0; i < shuffledArr.length; i++) shuffledArr[i] = Double.POSITIVE_INFINITY;
+		T[] shuffledArr = (T[]) new Object[arr.length];
+		for (int i = 0; i < shuffledArr.length; i++) shuffledArr[i] = null;
 		int position;
 		
 		for (int i = 0; i < arr.length; i++) {
 			do {
 				position = (int) (Math.random() * shuffledArr.length);
-			} while (shuffledArr[position] != Double.POSITIVE_INFINITY);
+			} while (shuffledArr[position] != null);
 				
 			shuffledArr[position] = arr[i];	
 		}
 		
-		for (int i = 0; i < arr.length; i++) arr[i] = shuffledArr[i];
+		for (int i = 0; i < arr.length; i++) arr[i] = (T) shuffledArr[i];
 	}
 
-	public static boolean isSorted(double[] arr) {
+	public static <T extends Number> boolean isSorted(T[] arr) {
 		if ((arr == null) || (arr.length == 1)) return true;
 		
 		for (int i = 1; i < arr.length; i++) {
-			if (arr[i] < arr[i - 1]) return false;
+			if (arr[i].doubleValue() < arr[i - 1].doubleValue()) return false;
 		}
 		
 		return true;
