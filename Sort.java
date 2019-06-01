@@ -17,7 +17,7 @@ class Sort {
 	
 	public static <T> void shuffleArray(T[] arr) {
 		if ((arr == null) || (arr.length == 1)) return;
-		T[] shuffledArr = (T[]) new Object[arr.length];
+		T[] shuffledArr = (T[]) new Object[arr.length]; //compilation warning
 		for (int i = 0; i < shuffledArr.length; i++) shuffledArr[i] = null;
 		int position;
 		
